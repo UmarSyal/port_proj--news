@@ -1,0 +1,53 @@
+{% extends 'news/base.html' %}
+
+{% block title_block %}
+    User Preferences
+{% endblock title_block %}
+
+{% block body_block %}
+    {% include 'snippets/messages_snippet.html' %}
+    
+    <h1>Please fill the form:</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        
+        {{ form.non_field_errors }}
+
+        <div class="form-group fieldWrapper">
+            {{ form.category.label_tag }}
+            {{ form.category.errors }}
+            <select class="form-control" name="{{ form.category.html_name }}" id="{{ form.category.id_for_label }}">
+                {% for value, text in form.fields.category.choices %}
+                    {% if user.preferences.category.id == value %}
+                        <option value="{{ value }}" selected="selected">{{ text }}</option>
+                    {% else %}
+                        <option value="{{ value }}">{{ text }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <div class="form-group fieldWrapper">
+            {{ form.provider.label_tag }}
+            {{ form.provider.errors }}
+            <select class="form-control" name="{{ form.provider.html_name }}" id="{{ form.provider.id_for_label }}">
+                {% for value, text in form.fields.provider.choices %}
+                    {% if user.preferences.provider.id == value %}
+                        <option value="{{ value }}" selected="selected">{{ text }}</option>
+                    {% else %}
+                        <option value="{{ value }}">{{ text }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Preferences</button>
+    </form>
+{% endblock body_block %}

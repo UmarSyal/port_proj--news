@@ -1,0 +1,92 @@
+{% extends 'news/base.html' %}
+
+{% block title_block %}
+    Django News Scrapper
+{% endblock title_block %}
+
+{% block body_block %}
+    {% include 'snippets/messages_snippet.html' %}
+
+    {% if news_list %}
+        <ul class="news-list lastest-news-list">
+            {% for news in news_list %}
+                <li class="row news-item">
+                    <div class="col-md-4 news-thumbnail">
+                        <a class="thumbnail" href="{% url 'news:news_detail' slug=news.slug %}">
+                            <img src="{{ news.thumbnail }}" alt="{{ news.headline }}">
+                        </a>
+                    </div>
+
+                    <div class="col-md-8 news-detail">
+                        <div class="category-provider">
+                            <span class="badge">
+                                <a href="{% url 'news:news_by_category' category=news.category.slug %}">
+                                    {{ news.category }}
+                                </a>
+                            </span>
+                            <span class="badge">
+                                <a href="{% url 'news:news_by_provider' provider=news.provider.slug %}">
+                                    {{ news.provider }}
+                                </a>
+                            </span>
+                        </div>
+
+                        <h2 class="headline">
+                            <a class="" href="{% url 'news:news_detail' slug=news.slug %}">
+                                {{ news.headline|striptags }}
+                            </a>
+                        </h2>
+
+                        <div class="preview">
+                            {% if news.story_excerpt %}
+                                <p>{{ news.story_excerpt|safe }}</p>
+                            {% else %}
+                                <p>{{ news.story_content|striptags|truncatewords:20 }}</p>
+                            {% endif %}
+                        </div>
+
+                        <div class="publish_date">
+                            <span>Published on: </span>
+                            <span>{{ news.published_on|date:"D d M Y" }}</span>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+
+        <ul class="pagination">
+            <div class="row">
+                <div class="col-xs-0 col-md-2"></div>
+
+                <div class="col-xs-12 col-md-8">
+                {% if page_obj.has_previous %}
+                    <li class="col-xs-2 col-md-2">
+                        <a href="?page=1">&laquo; First</a>
+                    </li>
+                    <li class="col-xs-2 col-md-2">
+                        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    </li>
+                {% endif %}
+
+                <li class="col-xs-4 col-md-4 active">
+                    <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="col-xs-2 col-md-2">
+                        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+                    </li>
+                    <li class="col-xs-2 col-md-2">
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
+                    </li>
+                {% endif %}
+                </div>
+
+                <div class="col-xs-0 col-md-2"></div>
+            </div>
+        </ul>
+    {% else %}
+        <h3>Sorry! No relevant news available at this time.</h3>
+    {% endif %}
+{% endblock body_block %}

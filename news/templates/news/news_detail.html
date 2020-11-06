@@ -1,0 +1,81 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    {{ news_detail.headline }}
+{% endblock title_block %}
+
+{% block body_block %}
+    <div class="category">
+        <span class="badge">
+            <a href="{% url 'news:news_by_category' category=news_detail.category.slug %}">
+                {{ news_detail.category }}
+            </a>
+        </span>
+    </div>
+
+    <div class="headline">
+        <h1>{{ news_detail.headline }}</h1>
+    </div>
+
+    <div class="story-excerpt">
+        {{ news_detail.story_excerpt|safe }}
+    </div>
+
+    <div class="provider category-provider">
+        <span class="badge">
+            <a href="{% url 'news:news_by_provider' provider=news_detail.provider.slug %}">
+                {{ news_detail.provider }}
+            </a>
+        </span>
+        <span class="">{{ news_detail.published_on|date:"d M Y" }}</span>
+    </div>
+
+    <div class="story-img">
+        <a class="thumbnail">
+            <img src="{{ news_detail.story_img }}" alt="{{ news_detail.headline }}">
+        </a>
+    </div>
+
+    <div id="audio" class="audio-buttons" style="display:none;">
+        <div class="row">
+            <label class="col-xs-2 col-md-1" for="voice_select">Voice:</label>
+            <select class="form-control" id="voice_select" name="voice_select"></select>
+
+            <label class="col-xs-2 col-md-1" for="volume_select">Volume:</label>
+            <select class="form-control" id="volume_select" name="volume_select">
+                <option value="0.00">00%</option>
+                <option value="0.25">25%</option>
+                <option value="0.50" selected="selected">50%</option>
+                <option value="0.75">75%</option>
+                <option value="1.00">100%</option>
+            </select>
+
+            <label class="col-xs-2 col-md-1" for="rate_select">Speed:</label>
+            <select class="form-control" id="rate_select" name="rate_select">
+                <option value="0.50">0.5</option>
+                <option value="1.00" selected="selected">1.0</option>
+                <option value="1.50">1.5</option>
+                <option value="2.00">2.0</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <button class="col-xs-6 col-md-2 btn btn-primary" id="playPause">
+                <i class="glyphicon glyphicon-play"></i>
+                <span>Play Audio</span>
+            </button>
+            
+            <button class="col-xs-6 col-md-2 btn btn-danger" id="stop" style="display:none;">
+                <i class="glyphicon glyphicon-stop"></i>
+                <span>Stop Audio</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="story" id="storyText">
+        {{ news_detail.story_content|safe }}
+    </div>
+
+    <script src="{% static 'news/js/master.js' %}"></script>
+{% endblock body_block %}

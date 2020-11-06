@@ -1,0 +1,162 @@
+body {
+    font-size: 1.5em;
+    color: black;
+    background-color: #F0E8D7;
+}
+
+ol, ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:focus, a:hover {
+    outline: none;
+    color: black;
+    text-decoration: none;
+}
+
+h1, h2 {
+    margin-top: 10px;
+}
+
+.col-md-8.news-detail {
+    padding-left: 15px;
+}
+
+.category-provider .badge {
+    color: orange;
+    background-color: #F0E8D7;
+    border-radius: 0;
+    padding-left: 0;
+}
+
+.category-provider .badge>a {
+    color: orange;
+}
+
+.publish_date {
+    color: grey;
+}
+
+.story {
+    font-size: 2em;
+}
+
+.story p {
+    margin-bottom: 20px;
+}
+
+.preview li:not(:first-child):before {
+    content: "\25CF\00a0";
+    color: #d7752b;
+}
+
+.preview li {
+    display: inline;
+}
+
+.preview {
+    font-size: 1.2em;
+}
+
+.story-excerpt ul {
+    list-style-type: square;
+    margin-bottom: 2rem;
+    padding-left: 2.5rem;
+    font-size: 1.5em;
+}
+
+.category .badge {
+    border-radius: 0%;
+    font-weight: 400;
+    min-width: 80px;
+}
+
+.category .badge>a {
+    color: white;
+    font-size: 15px;
+    border-radius: 0%;
+}
+
+.provider .badge {
+    font-size: 15px;
+}
+
+.thumbnail {
+    border: 1px solid gray;
+    background-color: transparent;
+}
+
+.audio-buttons .row {
+    margin: 0 0 10px 0;
+}
+
+@media (max-width: 992px){
+.audio-buttons button.col-xs-6 {
+    width: 48%;
+}
+}
+
+.audio-buttons label {
+    padding-left: 0px;
+}
+
+.audio-buttons select {
+    background-color: transparent;
+}
+
+#playPause {
+    margin-right: 4%;
+}
+@media (min-width: 992px){
+    #playPause {
+        margin-right: 1%;
+    }
+}
+
+.story-img {
+    margin-top: 10px;
+}
+
+.pagination {
+    display: block;
+}
+
+.pagination li{
+    text-align: center;
+    color: tomato;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.pagination li a {
+    color: tomato;
+}
+
+.pagination .col-xs-12 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (max-width: 991px){
+    .pagination .col-xs-0 {
+        display: none;
+    }
+}
+
+ul.errorlist {
+    color: red;
+}
+
+.success {
+    color: white;
+    background-color: #3c763d;
+    border-color: #d6e9c6;
+    font-size: 1.2em;
+    padding: 5px;
+}
