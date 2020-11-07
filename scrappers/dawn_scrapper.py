@@ -1,17 +1,13 @@
-from dateutil.tz import tzoffset
 from dateutil.parser import parse as parse_date
 from dateutil.utils import default_tzinfo
 
 import bs4 # pip install bs4
 
 from news import models
-from .utils import get_soup, log_scrape
+from .utils import get_soup, log_scrape, default_tz
 
 
-default_tz = tzoffset("Asia/Karachi", +18000)
-
-
-def dawn_scrapper(soup, news_provider):
+def dawn_scrapper(soup, news_provider, last_news_provider):
     """
     go through the soup object obtained from Dawn news scrape call.
     go through all the articles, retrieve required data and
@@ -103,7 +99,7 @@ def dawn_scrapper(soup, news_provider):
             
     print('\nTotal Fetched: ', len(news_list))
     print('Total Errors: ', len(errors))
-    log_scrape(news_provider['name'], len(news_list), len(errors))
+    log_scrape(news_provider['name'], last_news_provider, len(news_list), len(errors))
     return news_list
 
 

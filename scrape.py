@@ -14,9 +14,10 @@ def scrape_news():
     """
     scrapes news from all news providers and saves them in DB
     """
-    for news_provider in news_providers:
+    for index, news_provider in enumerate(news_providers):
         soup = get_soup(news_provider['website'])
-        news_list = news_provider['scrapper'](soup, news_provider)
+        last_news_provider = True if (index == len(news_providers) - 1) else False
+        news_list = news_provider['scrapper'](soup, news_provider, last_news_provider)
 
 
 news_providers = [

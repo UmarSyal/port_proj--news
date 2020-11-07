@@ -1,6 +1,9 @@
 from requests_html import HTMLSession # pip install requests-html
 import bs4 # pip install bs4
 from datetime import datetime
+from dateutil.tz import tzoffset
+
+default_tz = tzoffset("Asia/Karachi", +18000)
 
 
 def get_soup(url):
@@ -16,7 +19,7 @@ def get_soup(url):
     return soup
 
 
-def log_scrape(news_provider, fetched, errors):
+def log_scrape(news_provider, last_news_provider, fetched, errors):
     date_time = str(datetime.now()) + '\n'
     news_provider = news_provider + '\t'
     fetched = 'Total Fetched: ' + str(fetched) + '\t'
@@ -29,7 +32,7 @@ def log_scrape(news_provider, fetched, errors):
             fetched,
             errors,
         ])
-        if news_provider.strip() == 'Dawn News':
+        if last_news_provider:
             f.writelines([
                 '------------------------------------------------------------\n',
             ])
