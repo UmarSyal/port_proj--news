@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -142,3 +143,7 @@ CELERY_TIMEZONE = TIME_ZONE
 LOGIN_URL = 'news:accounts:sign_in'
 LOGIN_REDIRECT_URL = 'news:user_home'
 LOGOUT_REDIRECT_URL = 'news:news_list'
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
