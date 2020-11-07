@@ -65,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'news.context_processors.get_news_categories',
+                'news.context_processors.get_news_providers',
             ],
         },
     },
@@ -108,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Karachi'
 
 USE_I18N = True
 
@@ -124,6 +126,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIR = [
     STATIC_DIR,
 ]
+STATIC_ROOT = STATIC_DIR
+
 
 # CELERY Configs
 CELERY_BROKER_URL = 'redis://localhost:6379'
@@ -131,7 +135,8 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Africa/Nairobi'
+CELERY_TIMEZONE = TIME_ZONE
+
 
 # Auth Configs
 LOGIN_URL = 'news:accounts:sign_in'

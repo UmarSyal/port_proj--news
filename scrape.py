@@ -1,6 +1,6 @@
 # setup django environment
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'news_scrapper.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'news_site.settings')
 
 import django
 django.setup()

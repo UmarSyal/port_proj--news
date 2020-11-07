@@ -20,6 +20,7 @@
 
     <title>{% block title_block %}{% endblock title_block %}</title>
 </head>
+
 <body>
     <div id="wrapper">
         <!-- Navigation -->
@@ -62,7 +63,7 @@
                         {% endfor %}
 
                         <h3>Contains:</h3>
-                        <input onchange="{% url 'news:search' %}" type="text" class="form-control" name="phrase" placeholder="Headline, Story, Excerpt">
+                        <input type="text" class="form-control" name="phrase" placeholder="Headline, Story, Excerpt">
 
                         <button type="submit" class="btn btn-primary">Filter News</button>
                     </form>
@@ -143,7 +144,5 @@
             });
         })
     </script>
-
-    
 </body>
 </html>

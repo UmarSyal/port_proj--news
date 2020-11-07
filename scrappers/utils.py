@@ -22,10 +22,14 @@ def log_scrape(news_provider, fetched, errors):
     fetched = 'Total Fetched: ' + str(fetched) + '\t'
     errors = 'Total Errors: ' + str(errors) + '\n'
 
-    with open('info.txt', 'a') as f:
+    with open('scrape_log.txt', 'a') as f:
         f.writelines([
             date_time,
             news_provider,
             fetched,
             errors,
         ])
+        if news_provider.strip() == 'Dawn News':
+            f.writelines([
+                '------------------------------------------------------------\n',
+            ])

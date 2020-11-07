@@ -1,6 +1,12 @@
-from dateutil import parser # pip install python-dateutil
+from dateutil.tz import tzoffset
+from dateutil.parser import parse as parse_date
+from dateutil.utils import default_tzinfo
+
 from news import models
 from .utils import get_soup, log_scrape
+
+
+default_tz = tzoffset("Asia/Karachi", +18000)
 
 
 def brecorder_scrapper(soup, news_provider):
@@ -53,7 +59,8 @@ def brecorder_scrapper(soup, news_provider):
             published_on = article.find('span', {"class": "story__time"})
             published_on = published_on.find('span', {"class": "timestamp--time timeago"})
             print('published_on:', type(published_on), end=' ')
-            published_on = parser.parse(published_on.text.strip())
+            published_on = parse_date(published_on.text.strip())
+            published_on = default_tzinfo(published_on, default_tz)
 
             # story excerpt
             story_excerpt = article.find('div', {'class': 'story__excerpt'})
