@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from scrape import scrape_news
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls', namespace='news')),
 ]
-
-scrape_news()
