@@ -1,3 +1,5 @@
+import os
+
 from celery.decorators import task
 from celery.utils.log import get_task_logger
 
@@ -10,5 +12,9 @@ def task_scrape_news():
     """
     Scrapes Latest News
     """
-    scrape.scrape_news()
+    # temporary solution until heroku paid account not available
+    os.system("heroku run python scrape.py")
+
+    # real solution once heroku paid account is available
+    # scrape.scrape_news()
     logger.info("News Scrapped")
