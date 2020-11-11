@@ -4,7 +4,7 @@ from news import models
 
 # Register your models here.
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('headline', 'category', 'provider', 'published_on')
+    list_display = ('headline', 'category', 'provider', 'published_on', 'created_on')
     list_filter = ('category', 'provider')
     list_per_page = 20
     ordering = ['-published_on']
