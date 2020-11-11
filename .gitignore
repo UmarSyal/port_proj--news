@@ -127,3 +127,4 @@ dmypy.json
 celerybeat-schedule.db
 dump.rdb
 scrape_log.txt
+bash-scripts/

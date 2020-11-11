@@ -1,4 +1,5 @@
 {% extends 'news/base.html' %}
+{% load custom_tags %}
 
 {% block title_block %}
     Django News Scrapper
@@ -56,35 +57,37 @@
         </ul>
 
         <ul class="pagination">
-            <div class="row">
-                <div class="col-xs-0 col-md-2"></div>
+            {% if is_paginated %}
+                <div class="row">
+                    <div class="col-xs-0 col-md-2"></div>
 
-                <div class="col-xs-12 col-md-8">
-                {% if page_obj.has_previous %}
-                    <li class="col-xs-2 col-md-2">
-                        <a href="?page=1">&laquo; First</a>
-                    </li>
-                    <li class="col-xs-2 col-md-2">
-                        <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
-                    </li>
-                {% endif %}
+                    <div class="col-xs-12 col-md-8">
+                    {% if page_obj.has_previous %}
+                        <li class="col-xs-2 col-md-2">
+                            <a href="?{% param_replace page=1 %}">&laquo; First</a>
+                        </li>
+                        <li class="col-xs-2 col-md-2">
+                            <a href="?{% param_replace page=page_obj.previous_page_number %}">Previous</a>
+                        </li>
+                    {% endif %}
 
-                <li class="col-xs-4 col-md-4 active">
-                    <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                </li>
+                    <li class="col-xs-4 col-md-4 active">
+                        <span class="current">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                    </li>
 
-                {% if page_obj.has_next %}
-                    <li class="col-xs-2 col-md-2">
-                        <a href="?page={{ page_obj.next_page_number }}">Next</a>
-                    </li>
-                    <li class="col-xs-2 col-md-2">
-                        <a href="?page={{ page_obj.paginator.num_pages }}">Last &raquo;</a>
-                    </li>
-                {% endif %}
+                    {% if page_obj.has_next %}
+                        <li class="col-xs-2 col-md-2">
+                            <a href="?{% param_replace page=page_obj.next_page_number %}">Next</a>
+                        </li>
+                        <li class="col-xs-2 col-md-2">
+                            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">Last &raquo;</a>
+                        </li>
+                    {% endif %}
+                    </div>
+
+                    <div class="col-xs-0 col-md-2"></div>
                 </div>
-
-                <div class="col-xs-0 col-md-2"></div>
-            </div>
+            {% endif %}
         </ul>
     {% else %}
         <h3>Sorry! No relevant news available at this time.</h3>
