@@ -15,8 +15,7 @@ def dawn_scrapper(soup, news_provider, last_news_provider):
     """
     
     # All News Articles
-    tabs = soup.select('main div.tabs__pane')
-    
+    tabs = soup.select('div.w-full > div.tabs div.tabs__pane')
     news_list = []
     errors = []
 
