@@ -26,7 +26,8 @@ def debug_task(self):
 app.conf.beat_schedule = {
     'add-every-three-hour-contrab': {
         'task': 'scrape_news',
-        'schedule': crontab(minute=0, hour='*/3'),
+        # 'schedule': crontab(minute=0, hour='*/3'),
+        'schedule': crontab(minute=0, hour='*/1'),
         # 'schedule': crontab(minute='*/7'),
     },
 }
