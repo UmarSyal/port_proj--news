@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.utils import timezone
 import datetime
 
 from news.models import News, NewsProvider, NewsCategory
@@ -47,9 +48,11 @@ class NewsListView(ListView):
             )
         else:
             # get news items from last 24 hours only
-            start = datetime.date.today()
-            end = start + datetime.timedelta(days=1)
-            queryset = News.objects.filter(created_on__range=(start, end))
+            # start = datetime.datetime.now()
+            # end = start - datetime.timedelta(days=4)
+            start = timezone.localtime(timezone.now())
+            end = start - timezone.timedelta(days=1)
+            queryset = News.objects.filter(created_on__gte=end)
         return queryset
 
 
