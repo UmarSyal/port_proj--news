@@ -127,4 +127,5 @@ dmypy.json
 celerybeat-schedule.db
 dump.rdb
 scrape_log.txt
-bash-scripts/
+bash-scripts/runserver
+bash-scripts/venv_activate
